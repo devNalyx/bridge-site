@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bridge — Local Agent Event Bridge</title>
+  <meta name="description" content="Zero-port webhook routing for local AI agents. GitHub events into your local CLI over an encrypted, outbound-only QUIC stream.">
+  <meta property="og:title" content="Bridge — Local Agent Event Bridge">
+  <meta property="og:description" content="Zero-port webhook routing for local AI agents. No tunnels, no open ports, no manual webhook config.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://bridge.nalyx.dev">
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #0a0a0b; color: #e6e6e6;
+           font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    main { max-width: 46rem; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+    .hero h1 { font-size: clamp(1.8rem, 5vw, 3rem); margin: 0 0 .75rem; letter-spacing: -.02em; }
+    .hero h1 span { color: #5eead4; }
+    .hero p { color: #9ca3af; line-height: 1.7; font-size: 1.05rem; }
+    .hero .sub { color: #71717a; font-size: .85rem; margin-bottom: 2rem; }
+    .cmd { padding: 1.25rem; border: 1px solid #26272b; border-radius: .5rem;
+           background: #111113; color: #d1d5db; font-size: .85rem; overflow-x: auto; line-height: 1.6; }
+    .ok { color: #5eead4; }
+    .warn { color: #fbbf24; }
+    .dim { color: #71717a; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2.5rem; }
+    .card { border: 1px solid #26272b; border-radius: .5rem; padding: 1.25rem; background: #0d0d0f; }
+    .card h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: #5eead4; margin: 0 0 .5rem; }
+    .card p { margin: 0; color: #9ca3af; font-size: .9rem; line-height: 1.55; }
+    .status { margin-top: 2.5rem; border-top: 1px solid #26272b; padding-top: 1rem;
+              color: #71717a; font-size: .8rem; }
+    a { color: #5eead4; }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <h1>Bridge<span>_</span></h1>
+      <p>Zero-port webhook routing for local AI agents. GitHub events into your local CLI over an encrypted, outbound-only QUIC stream — no tunnels, no open ports, no manual webhook config.</p>
+      <p class="sub">Local Agent Event Bridge · <span style="color:#5eead4">[PRE-LAUNCH]</span></p>
+    </section>
+
+    <pre class="cmd">$ bridge watch --repo owner/repo --events issues,pull_request
+<span class="ok">✔ Authenticated as @alireza [github-oauth]
+✔ Provisioned secure edge webhook: wbh_89f012aa9c
+✔ Established bi-directional QUIC stream (TLS 1.3)</span>
+<span class="warn">🚀 Listening for agent triggers...</span>
+<span class="dim"># filtered 12 CI-bot events · 0 open ports · 24h DLQ armed</span></pre>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Outbound-only</h2>
+        <p>Your machine never listens on a public port. Connections dial out over TLS 1.3 — attack surface at absolute zero.</p>
+      </div>
+      <div class="card">
+        <h2>Edge-smart filtering</h2>
+        <p>Draft PRs, CI bot commits, stale threads — dropped at the edge before they ever wake your local agent.</p>
+      </div>
+      <div class="card">
+        <h2>Ordered replay</h2>
+        <p>Connection dropped? A 24h buffer replays missed events in exact order the moment you reconnect.</p>
+      </div>
+    </section>
+
+    <footer class="status">
+      <span style="color:#5eead4">[ONLINE]</span> landing placeholder · tracking in
+      <a href="https://github.com/devNalyx/bridge/issues">issues</a> · org
+      <a href="https://github.com/devNalyx">@devNalyx</a>
+    </footer>
+  </main>
+</body>
+</html>
