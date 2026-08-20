@@ -30,9 +30,10 @@
     strong { color: #d1d5db; }
 
     .cmd { padding: 1.25rem; border: 1px solid #26272b; border-radius: .5rem;
-           background: #111113; color: #d1d5db; font-size: .85rem; overflow-x: auto; line-height: 1.6; }
-    .ok { color: #5eead4; }
-    .warn { color: #fbbf24; }
+           background: #111113; color: #d1d5db; font-size: .82rem; overflow-x: auto; line-height: 1.7; }
+    .role { color: #5eead4; }
+    .arrow { color: #71717a; }
+    .gate { color: #fbbf24; }
     .dim { color: #71717a; }
 
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
@@ -42,6 +43,8 @@
 
     ol.steps { margin: 0; padding-left: 1.2rem; color: #9ca3af; font-size: .9rem; line-height: 1.9; }
     ol.steps li strong { color: #d1d5db; }
+
+    .note { font-size: .85rem; color: #71717a; margin-top: 1.25rem; }
 
     blockquote { margin: 0; padding: 1rem 1.25rem; border-left: 2px solid #5eead4;
                  background: #111113; border-radius: 0 .5rem .5rem 0; color: #d1d5db;
@@ -66,96 +69,101 @@
       <p>Bridge is the operational orchestration layer for hybrid software teams — it routes work,
       carries context, enforces policy, and knows exactly when to bring a human in. Not another
       coding agent. Not another dashboard. The layer that decides what happens next.</p>
-      <p class="sub">Local Agent Event Bridge · <span style="color:#5eead4">[PRE-LAUNCH]</span></p>
+      <p class="sub"><span style="color:#5eead4">[PRE-LAUNCH]</span></p>
     </section>
 
     <section>
       <h2 class="label">The problem</h2>
-      <p>Your agents can already implement, review, and test. What they can't do is coordinate
-      themselves — so you do it by hand: telling one agent what another decided, re-explaining
-      context across terminals, deciding who acts next.</p>
+      <p>Multiple agents can already execute work — implement, review, test, investigate. What's
+      missing is the layer that coordinates them: deciding who acts next, carrying context between
+      participants, enforcing policy on what can happen automatically, and knowing when a human
+      needs to step in. Today that layer is you: copy-pasting results between terminals,
+      re-explaining context to the next agent, deciding by hand who should act next.</p>
+    </section>
+
+    <section>
+      <h2 class="label">The solution</h2>
       <p>Bridge is not a webhook relay with a product wrapped around it. It's the control plane:
       given what just happened in your repo, Bridge decides who or what should act next, with what
       context, under what policy — and whether it needs you first.</p>
     </section>
 
     <section>
-      <h2 class="label">Why it's different</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Stop being the glue</h3>
-          <p>Bridge watches your repo's events and routes them to the right participant — human or
-          agent — automatically.</p>
-        </div>
-        <div class="card">
-          <h3>Context travels with the work</h3>
-          <p>A handoff carries what the next participant needs to act, not just a notification that
-          something happened.</p>
-        </div>
-        <div class="card">
-          <h3>You stay in command</h3>
-          <p>Policy defines what's automatic and what waits for you. Bridge escalates judgment
-          calls; it doesn't make them for you.</p>
-        </div>
-        <div class="card">
-          <h3>Every decision is traceable</h3>
-          <p>Handoffs, approvals, and actions are auditable — a system you can trust with real
-          repos.</p>
-        </div>
-      </div>
+      <h2 class="label">How it works</h2>
+      <p>The first proven workflow: <strong>implementer → Bridge → reviewer → Bridge → human.</strong></p>
+      <ol class="steps">
+        <li>An <strong>implementation agent</strong> builds a change and opens a pull request.</li>
+        <li><strong>Bridge</strong> detects the event and routes it to the reviewer role, with the
+            context it needs attached.</li>
+        <li>The <strong>reviewer</strong> acts — no copy-pasting between terminals.</li>
+        <li>Changes requested → Bridge hands it back to the <strong>implementer</strong>, automatically.</li>
+        <li>Review passes → Bridge checks policy: does this need your approval?</li>
+        <li><strong>You're</strong> notified only when your judgment is actually the next step.</li>
+      </ol>
+      <pre class="cmd">$ bridge watch --repo owner/repo
+
+<span class="role">[implementer]</span> opened PR #142 "Add rate limiting to /api/ingest"
+  <span class="arrow">→ routed to reviewer · context attached (diff, linked issue, prior notes)</span>
+
+<span class="role">[reviewer]</span> requested changes — rate limit window is hardcoded
+  <span class="arrow">→ routed back to implementer</span>
+
+<span class="role">[implementer]</span> pushed a fix, re-requested review
+<span class="role">[reviewer]</span> approved
+  <span class="gate">→ policy: security-sensitive path → human approval required</span>
+  <span class="dim"># notified you · waiting on your call</span></pre>
     </section>
 
     <section>
-      <h2 class="label">What Bridge coordinates</h2>
+      <h2 class="label">Core capabilities</h2>
       <div class="grid">
         <div class="card">
-          <h3>Roles, not just tools</h3>
-          <p>Implementer, reviewer, security reviewer, tester, investigator, human approver — every
-          participant has a defined responsibility and bounded authority.</p>
+          <h3>Roles</h3>
+          <p>Implementer, reviewer, security reviewer, tester, human approver — every participant
+          has a defined responsibility and bounded authority.</p>
         </div>
         <div class="card">
-          <h3>Event-driven coordination</h3>
+          <h3>Events</h3>
           <p>PR opened, review requested, CI failed, approval needed — Bridge reacts to what
           actually happened in your repo, not a poll loop.</p>
         </div>
         <div class="card">
-          <h3>Policy-aware automation</h3>
+          <h3>Context</h3>
+          <p>A handoff carries what the next participant needs to act, not just a notification that
+          something happened.</p>
+        </div>
+        <div class="card">
+          <h3>Handoffs</h3>
+          <p>Work moves from implementer to reviewer to human automatically, with nothing lost in
+          translation.</p>
+        </div>
+        <div class="card">
+          <h3>Policies</h3>
           <p>Routine work proceeds automatically. Security-sensitive changes and ambiguous calls
           stop for a human — by policy, not by accident.</p>
         </div>
         <div class="card">
-          <h3>Zero-port delivery</h3>
-          <p>Your machine only ever dials out. Events reach your local agents over an encrypted,
-          outbound-only stream — no open ports, no manually managed tunnels.</p>
+          <h3>Human escalation</h3>
+          <p>You're brought in exactly when your judgment has the highest value, not for every
+          step.</p>
+        </div>
+        <div class="card">
+          <h3>Auditability</h3>
+          <p>Handoffs, approvals, and actions are traceable — a system you can trust with real
+          repos.</p>
         </div>
       </div>
+      <p class="note">Bridge runs entirely outbound — no open inbound ports, no tunnel to babysit —
+      but that's plumbing in service of the above, not the point of the product.</p>
     </section>
-
-    <section>
-      <h2 class="label">How it works</h2>
-      <p>The first proven workflow: <strong>implementer → reviewer → human.</strong></p>
-      <ol class="steps">
-        <li>An <strong>implementation agent</strong> builds a change and opens a pull request.</li>
-        <li><strong>Bridge</strong> detects the event and routes it to the reviewer role.</li>
-        <li>The <strong>reviewer</strong> acts with the context it needs — no copy-pasting between terminals.</li>
-        <li>Changes requested → handed back to the <strong>implementer</strong>, automatically.</li>
-        <li>Review passes → Bridge decides whether this needs your approval.</li>
-        <li><strong>You're</strong> notified only when your judgment is actually the next step.</li>
-      </ol>
-    </section>
-
-    <pre class="cmd">$ bridge watch --repo owner/repo --events issues,pull_request
-<span class="ok">✔ Authenticated as @alireza [github-oauth]
-✔ Provisioned secure edge webhook: wbh_89f012aa9c
-✔ Established bi-directional QUIC stream (TLS 1.3)</span>
-<span class="warn">🚀 Coordinating implementer, reviewer, and you...</span>
-<span class="dim"># filtered 12 CI-bot events · 0 open ports · 24h DLQ armed</span></pre>
 
     <section>
       <h2 class="label">Why Bridge</h2>
       <p>Because the future of AI-assisted development isn't one perfect agent doing everything —
       it's several specialized agents and humans, and someone has to make them work together well.
-      That's the harder problem, and it's the one Bridge is built around.</p>
+      That's the harder problem, and it's the one Bridge is built around. Bridge doesn't compete
+      with your coding agents, your GitHub, or your issue tracker — it complements all of them.
+      What it replaces is manual coordination between autonomous participants.</p>
     </section>
 
     <section>
@@ -163,8 +171,12 @@
       <blockquote>Today you think: "which terminal do I need to open next, and which agent do I
       need to tell what?" Bridge's goal is for you to think instead: "the system knows who's
       responsible for the next step."</blockquote>
-      <p style="margin-top:.75rem">Agents execute. Bridge coordinates. Humans decide where
-      judgment matters.</p>
+      <p style="margin-top:.75rem">Agents execute. Bridge coordinates. Humans decide where judgment
+      matters.</p>
+      <p>Longer term, the same operational position that lets Bridge coordinate a workflow lets it
+      learn from one: which reviewers care about what, which agents perform well on which tasks,
+      where human intervention is actually needed. That's a future capability Bridge earns by
+      proving the coordination loop first — not a claim about what exists today.</p>
     </section>
 
     <section class="cta">
