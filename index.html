@@ -4,11 +4,42 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bridge — coordinate humans and AI agents as one software team</title>
-  <meta name="description" content="Bridge is the operational orchestration layer for hybrid software teams. It routes work, carries context, enforces policy, and knows exactly when to bring a human in.">
+  <meta name="description" content="Bridge is the orchestration layer for hybrid software teams — coordinating GitHub pull requests across AI coding agents, reviewers, and humans, with policy-aware automation and human-in-the-loop approval.">
+  <link rel="canonical" href="https://bridge.nalyx.dev/">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0iIzBhMGEwYiIvPjxjaXJjbGUgY3g9IjkiIGN5PSIyMSIgcj0iMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNWVlYWQ0IiBzdHJva2Utd2lkdGg9IjIiLz48Y2lyY2xlIGN4PSIyMyIgY3k9IjIxIiByPSIzIiBmaWxsPSIjNWVlYWQ0Ii8+PHBhdGggZD0iTTkgMjFDOSAxMCAyMyAxMCAyMyAyMSIgc3Ryb2tlPSIjNWVlYWQ0IiBzdHJva2Utd2lkdGg9IjIuMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==">
   <meta property="og:title" content="Bridge — coordinate humans and AI agents as one software team">
-  <meta property="og:description" content="The operational orchestration layer for hybrid software teams. Not another coding agent. Not another dashboard. The layer that decides what happens next.">
+  <meta property="og:description" content="The orchestration layer for hybrid software teams. Not another coding agent. Not another dashboard. The layer that decides what happens next.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://bridge.nalyx.dev">
+  <meta property="og:image" content="https://bridge.nalyx.dev/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bridge — coordinate humans and AI agents as one software team">
+  <meta name="twitter:description" content="The orchestration layer for hybrid software teams. Not another coding agent. Not another dashboard. The layer that decides what happens next.">
+  <meta name="twitter:image" content="https://bridge.nalyx.dev/og-image.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "Bridge",
+        "url": "https://bridge.nalyx.dev",
+        "logo": "https://bridge.nalyx.dev/og-image.png",
+        "sameAs": ["https://github.com/devNalyx"]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Bridge",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",
+        "url": "https://bridge.nalyx.dev",
+        "description": "Bridge is the orchestration layer for hybrid software teams — it routes work, carries context, enforces policy, and knows exactly when to bring a human in."
+      }
+    ]
+  }
+  </script>
   <style>
     :root { color-scheme: dark; }
     * { box-sizing: border-box; }
@@ -50,15 +81,47 @@
                  background: #111113; border-radius: 0 .5rem .5rem 0; color: #d1d5db;
                  font-size: .95rem; line-height: 1.6; }
 
+    /* personas */
+    .personas { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .persona { border: 1px solid #26272b; border-radius: .5rem; padding: 1.25rem; background: #0d0d0f; }
+    .persona h3 { color: #5eead4; font-size: .9rem; margin: 0 0 .5rem; }
+    .persona p { margin: 0; font-size: .875rem; }
+
+    /* comparison table */
+    .table-wrap { overflow-x: auto; border: 1px solid #26272b; border-radius: .5rem; }
+    table.compare { width: 100%; border-collapse: collapse; font-size: .85rem; min-width: 32rem; }
+    table.compare th, table.compare td { text-align: left; padding: .75rem .9rem; vertical-align: top; }
+    table.compare thead th { color: #5eead4; font-size: .72rem; text-transform: uppercase;
+      letter-spacing: .06em; border-bottom: 1px solid #26272b; background: #111113; }
+    table.compare tbody th { color: #d1d5db; font-weight: 600; white-space: nowrap; }
+    table.compare tbody td { color: #9ca3af; }
+    table.compare tbody tr + tr th, table.compare tbody tr + tr td { border-top: 1px solid #1c1d21; }
+
+    /* proof */
+    ul.proof { margin: 0; padding-left: 1.2rem; color: #9ca3af; font-size: .9rem; line-height: 1.85; }
+    ul.proof li strong { color: #d1d5db; }
+
+    /* early access */
+    .access { border: 1px solid #26272b; border-radius: .5rem; padding: 1.5rem; background: #0d0d0f; }
+    .access p { margin: 0 0 1rem; }
+    .access a.btn.mail { display: inline-flex; align-items: center; gap: .5rem; padding: .65rem 1.2rem;
+      border: 1px solid #5eead4; border-radius: .4rem; color: #5eead4; text-decoration: none;
+      font-size: .9rem; }
+    .access a.btn.mail:hover { background: #5eead422; }
+    .access .fine { margin: .85rem 0 0; font-size: .8rem; color: #71717a; }
+
     .cta { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #26272b; }
     .cta a.btn { display: inline-block; padding: .6rem 1.1rem; border: 1px solid #5eead4;
                  border-radius: .4rem; color: #5eead4; text-decoration: none; font-size: .9rem;
-                 margin-right: .75rem; }
+                 margin-right: .75rem; margin-bottom: .5rem; }
     .cta a.btn:hover { background: #5eead422; }
+    .cta a.btn.ghost { border-color: #26272b; color: #9ca3af; }
+    .cta a.btn.ghost:hover { background: #111113; }
 
     footer.status { margin-top: 2.5rem; border-top: 1px solid #26272b; padding-top: 1rem;
               color: #71717a; font-size: .8rem; }
     a { color: #5eead4; }
+    a:focus-visible, .access a.btn.mail:focus-visible, .cta a.btn:focus-visible { outline: 2px solid #5eead4; outline-offset: 2px; }
   </style>
 </head>
 <body>
@@ -86,6 +149,24 @@
       <p>Bridge is not a webhook relay with a product wrapped around it. It's the control plane:
       given what just happened in your repo, Bridge decides who or what should act next, with what
       context, under what policy — and whether it needs you first.</p>
+    </section>
+
+    <section>
+      <h2 class="label">Who it's for</h2>
+      <div class="personas">
+        <div class="persona">
+          <h3>The AI-native builder</h3>
+          <p>You're comfortable in a terminal and already juggling several coding agents at once —
+          switching between them, re-explaining context, deciding by hand who does what next. You
+          feel the coordination tax personally, every day, without needing a team to justify it.</p>
+        </div>
+        <div class="persona">
+          <h3>The small distributed team</h3>
+          <p>Roughly 2–6 developers, humans and agents working side by side, often across time
+          zones. Coordination today happens through GitHub, chat, issues, and manual instructions —
+          you need reliability and clear responsibility, not another enterprise dashboard.</p>
+        </div>
+      </div>
     </section>
 
     <section>
@@ -158,12 +239,44 @@
     </section>
 
     <section>
+      <h2 class="label">Why not just X</h2>
+      <div class="table-wrap">
+        <table class="compare">
+          <thead>
+            <tr><th>Instead of</th><th>What it does</th><th>Where Bridge differs</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>Coding agents</th><td>Generate and modify code</td><td>Bridge coordinates them, it doesn't compete with them</td></tr>
+            <tr><th>GitHub</th><td>Source control and collaboration</td><td>Bridge orchestrates the workflow that happens around it</td></tr>
+            <tr><th>Jira / Linear</th><td>Represent and track work</td><td>Bridge coordinates the execution of that work across participants</td></tr>
+            <tr><th>Engineering analytics</th><td>Measure performance after the fact</td><td>Bridge operates during the workflow, not after it</td></tr>
+            <tr><th>Chat platforms</th><td>Human communication</td><td>Bridge automates the handoffs chat can't</td></tr>
+            <tr><th>Automation platforms</th><td>Generic, protocol-agnostic automation</td><td>Bridge is purpose-built for human–AI software workflows</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
       <h2 class="label">Why Bridge</h2>
       <p>Because the future of AI-assisted development isn't one perfect agent doing everything —
       it's several specialized agents and humans, and someone has to make them work together well.
       That's the harder problem, and it's the one Bridge is built around. Bridge doesn't compete
       with your coding agents, your GitHub, or your issue tracker — it complements all of them.
       What it replaces is manual coordination between autonomous participants.</p>
+    </section>
+
+    <section>
+      <h2 class="label">Proof, not promises</h2>
+      <ul class="proof">
+        <li><strong>Built, not mocked up.</strong> A real GitHub App, real webhook ingestion, real
+        sandboxed AI agents, and a real policy gate — the loop on this page runs against actual
+        repos, not a demo script.</li>
+        <li><strong>Adversarially audited twice.</strong> Each round of independent review found and
+        fixed real gaps — including a critical security issue — before the work was called done.</li>
+        <li><strong>Every decision is traceable.</strong> Handoffs, approvals, and policy calls can
+        be reconstructed after the fact: who acted, on what context, under what policy.</li>
+      </ul>
     </section>
 
     <section>
@@ -179,17 +292,31 @@
       proving the coordination loop first — not a claim about what exists today.</p>
     </section>
 
+    <section id="early-access">
+      <h2 class="label">Get early access</h2>
+      <div class="access">
+        <p>Bridge is pre-launch — built and running, not yet open beyond the founder. Send an
+        email and you'll hear the moment there's something to try.</p>
+        <a class="btn mail" href="mailto:ali@nalyx.dev?subject=Bridge%20early%20access&body=Hi%20-%20I'd%20like%20early%20access%20to%20Bridge.%0A%0AWhat%20I'm%20working%20on%3A%20">
+          Get early access →
+        </a>
+        <p class="fine">Opens your email client. No signup, no mailing list yet — just a direct
+        line to the founder.</p>
+      </div>
+    </section>
+
     <section class="cta">
-      <h2 class="label">Get involved</h2>
-      <p>Bridge is pre-launch. Track progress and the roadmap on GitHub.</p>
-      <a class="btn" href="https://github.com/devNalyx/bridge/issues">View the roadmap →</a>
-      <a class="btn" href="https://github.com/devNalyx">@devNalyx</a>
+      <h2 class="label">Follow along</h2>
+      <p>Building in the open on GitHub. The product repo is private for now — the org is the
+      best place to follow.</p>
+      <a class="btn" href="mailto:ali@nalyx.dev?subject=Bridge%20early%20access">Get early access →</a>
+      <a class="btn ghost" href="https://github.com/devNalyx">@devNalyx on GitHub</a>
     </section>
 
     <footer class="status">
-      <span style="color:#5eead4">[ONLINE]</span> landing page · tracking in
-      <a href="https://github.com/devNalyx/bridge/issues">issues</a> · org
-      <a href="https://github.com/devNalyx">@devNalyx</a>
+      <span style="color:#5eead4">[ONLINE]</span> landing page · org
+      <a href="https://github.com/devNalyx">@devNalyx</a> · early access via
+      <a href="mailto:ali@nalyx.dev">ali@nalyx.dev</a>
     </footer>
   </main>
 </body>

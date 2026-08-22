@@ -18,6 +18,9 @@ there — if the two drift, that file wins.
 
 - `index.html` — the landing page, rebuilt around Bridge's orchestration/control-plane
   positioning (tracked in `devNalyx/bridge` issue #37, shipped).
+- `og-image.png` — 1200×630 social share preview (`og:image`/`twitter:image`), rendered from the
+  page's own dark terminal aesthetic so a shared link doesn't show a blank card.
+- `robots.txt`, `sitemap.xml` — basic crawl/indexing hygiene for the single page.
 - `CNAME` — points Pages at `bridge.nalyx.dev` (custom domain wired by @AliRezaTaleghani).
 
 ## Edits
@@ -25,3 +28,8 @@ there — if the two drift, that file wins.
 Keep it boring and dependency-free. Preview locally by opening `index.html` or
 `python3 -m http.server`. When copy changes, update
 `devNalyx/bridge`'s `docs/website/landing-page-copy.md` to match.
+
+The primary CTA is a plain `mailto:` link (no form backend, no third party, no dependency) — it
+used to point at `devNalyx/bridge/issues`, which 404s for anyone without access since that repo is
+private. If a real waitlist/form service gets adopted later, replace both the hero-adjacent and
+footer `mailto:` links together so they don't drift.
