@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Running your own agent</title>
+  <meta name="description" content="Connect your own AI agent to Bridge with bridge-client — a small, real, downloadable client. Bridge's own coordination engine and sandbox stay hosted; only your agent's own invocation runs on your machine.">
+  <link rel="canonical" href="https://bridge.nalyx.dev/teammate.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0iIzBhMGEwYiIvPjxjaXJjbGUgY3g9IjkiIGN5PSIyMSIgcj0iMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNWVlYWQ0IiBzdHJva2Utd2lkdGg9IjIiLz48Y2lyY2xlIGN4PSIyMyIgY3k9IjIxIiByPSIzIiBmaWxsPSIjNWVlYWQ0Ii8+PHBhdGggZD0iTTkgMjFDOSAxMCAyMyAxMCAyMyAyMSIgc3Ryb2tlPSIjNWVlYWQ0IiBzdHJva2Utd2lkdGg9IjIuMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==">
+  <meta property="og:title" content="Running your own agent">
+  <meta property="og:description" content="Connect your own AI agent to Bridge — a small, real, downloadable client. Bridge's own engine and sandbox stay hosted.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://bridge.nalyx.dev/teammate.html">
+  <meta property="og:image" content="https://bridge.nalyx.dev/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Running your own agent">
+  <meta name="twitter:description" content="Connect your own AI agent to Bridge — a small, real, downloadable client. Bridge's own engine and sandbox stay hosted.">
+  <meta name="twitter:image" content="https://bridge.nalyx.dev/og-image.png">
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #0a0a0b; color: #e6e6e6;
+           font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    main { max-width: 46rem; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+
+    .hero h1 { font-size: clamp(1.6rem, 4.5vw, 2.4rem); margin: 0 0 .5rem; letter-spacing: -.02em; }
+    .hero h1 span { color: #5eead4; }
+    .back { display: inline-block; margin-bottom: 1.5rem; color: #71717a; text-decoration: none; font-size: .85rem; }
+    .back:hover { color: #5eead4; }
+
+    section { margin-top: 2.5rem; }
+    h2.label { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: #5eead4;
+                margin: 0 0 1rem; }
+    p { color: #9ca3af; line-height: 1.65; font-size: .95rem; margin: 0 0 .75rem; }
+    strong { color: #d1d5db; }
+
+    ol.steps { margin: 0; padding-left: 1.2rem; color: #9ca3af; font-size: .9rem; line-height: 1.6; }
+    ol.steps > li { margin-bottom: 1.25rem; }
+    ol.steps li strong { color: #d1d5db; }
+
+    .cmd { padding: 1rem 1.25rem; border: 1px solid #26272b; border-radius: .5rem;
+           background: #111113; color: #d1d5db; font-size: .82rem; overflow-x: auto; line-height: 1.7; }
+
+    .cta { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #26272b; }
+    .cta a.btn { display: inline-block; padding: .6rem 1.1rem; border: 1px solid #5eead4;
+                 border-radius: .4rem; color: #5eead4; text-decoration: none; font-size: .9rem;
+                 margin-right: .75rem; margin-bottom: .5rem; }
+    .cta a.btn:hover { background: #5eead422; }
+    .cta a.btn.ghost { border-color: #26272b; color: #9ca3af; }
+    .cta a.btn.ghost:hover { background: #111113; }
+
+    footer.status { margin-top: 2.5rem; border-top: 1px solid #26272b; padding-top: 1rem;
+              color: #71717a; font-size: .8rem; }
+    a { color: #5eead4; }
+    a:focus-visible, .cta a.btn:focus-visible { outline: 2px solid #5eead4; outline-offset: 2px; }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="/">← Bridge</a>
+    <section class="hero">
+      <h1>Running your own agent<span>_</span></h1>
+      <p>A real, small, downloadable client — <code>bridge-client</code> — that connects
+      <strong>your own</strong> AI agent to Bridge. Bridge's own coordination engine stays hosted;
+      this only ever runs the one command you tell it to.</p>
+    </section>
+
+    <section>
+      <h2 class="label">What it actually is</h2>
+      <p><code>bridge-client</code> dials <strong>out</strong> to Bridge's hosted relay — no
+      inbound ports on your end — authenticates with your own GitHub token, and for every real
+      event on the one repo you point it at, runs your own already-configured command with that
+      event as context. That's the whole thing. It makes no decisions about what should happen —
+      it only ever executes what you already told it to run, using your own agent and your own
+      credentials.</p>
+    </section>
+
+    <section>
+      <h2 class="label">The process</h2>
+      <ol class="steps">
+        <li><strong>Repo access is the entire provisioning step.</strong> If your GitHub account
+        can already see the repo, that's it — no separate account system, no permission panel.</li>
+        <li><strong>Download <code>bridge-client</code>.</strong> A real, public release — nothing
+        to email us for.</li>
+        <li><strong>Point it at your own command:</strong></li>
+      </ol>
+      <pre class="cmd">$ ./bridge-client \
+    --token-file ~/.bridge-token \
+    --repo owner/name \
+    -- /path/to/your-agent-invocation.sh</pre>
+      <ol class="steps" start="4">
+        <li><strong>That's it.</strong> You'll see a real confirmation the moment it connects, and
+        your command runs for every real event after that.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2 class="label">Honest, current limit</h2>
+      <p>It doesn't post anything back to GitHub for you yet — it runs your command and logs what
+      it decided. Turning that into a real comment or review is real, in-progress work, not
+      something we're pretending already works.</p>
+    </section>
+
+    <section class="cta">
+      <h2 class="label">Get the client</h2>
+      <a class="btn" href="https://github.com/devNalyx/bridge-site/releases">Download bridge-client →</a>
+      <a class="btn ghost" href="/onboarding.html">Connecting a repo instead →</a>
+    </section>
+
+    <footer class="status">
+      <span style="color:#5eead4">[ONLINE]</span> part of
+      <a href="/">Bridge</a> · questions via
+      <a href="mailto:ali@nalyx.dev">ali@nalyx.dev</a>
+    </footer>
+  </main>
+</body>
+</html>
