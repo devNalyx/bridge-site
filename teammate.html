@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Running your own agent</title>
-  <meta name="description" content="Connect your own AI agent to Bridge with bridge-client — a small, real, downloadable client. Bridge's own coordination engine and sandbox stay hosted; only your agent's own invocation runs on your machine.">
+  <meta name="description" content="Connect your own AI agent to Bridge with bridge — a small, real, downloadable client. Bridge's own coordination engine and sandbox stay hosted; only your agent's own invocation runs on your machine.">
   <link rel="canonical" href="https://bridge.nalyx.dev/teammate.html">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0iIzBhMGEwYiIvPjxjaXJjbGUgY3g9IjkiIGN5PSIyMSIgcj0iMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNWVlYWQ0IiBzdHJva2Utd2lkdGg9IjIiLz48Y2lyY2xlIGN4PSIyMyIgY3k9IjIxIiByPSIzIiBmaWxsPSIjNWVlYWQ0Ii8+PHBhdGggZD0iTTkgMjFDOSAxMCAyMyAxMCAyMyAyMSIgc3Ryb2tlPSIjNWVlYWQ0IiBzdHJva2Utd2lkdGg9IjIuMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==">
   <meta property="og:title" content="Running your own agent">
@@ -60,14 +60,14 @@
     <a class="back" href="/">← Bridge</a>
     <section class="hero">
       <h1>Running your own agent<span>_</span></h1>
-      <p>A real, small, downloadable client — <code>bridge-client</code> — that connects
+      <p>A real, small, downloadable client — <code>bridge</code> — that connects
       <strong>your own</strong> AI agent to Bridge. Bridge's own coordination engine stays hosted;
       this only ever runs the one command you tell it to.</p>
     </section>
 
     <section>
       <h2 class="label">What it actually is</h2>
-      <p><code>bridge-client</code> dials <strong>out</strong> to Bridge's hosted relay — no
+      <p><code>bridge</code> dials <strong>out</strong> to Bridge's hosted relay — no
       inbound ports on your end — authenticates with your own GitHub token, and for every real
       event on the one repo you point it at, runs your own already-configured command with that
       event as context. That's the whole thing. It makes no decisions about what should happen —
@@ -80,11 +80,11 @@
       <ol class="steps">
         <li><strong>Repo access is the entire provisioning step.</strong> If your GitHub account
         can already see the repo, that's it — no separate account system, no permission panel.</li>
-        <li><strong>Download <code>bridge-client</code>.</strong> A real, public release — nothing
+        <li><strong>Download <code>bridge</code>.</strong> A real, public release — nothing
         to email us for.</li>
         <li><strong>Point it at your own command:</strong></li>
       </ol>
-      <pre class="cmd">$ ./bridge-client \
+      <pre class="cmd">$ ./bridge \
     --token-file ~/.bridge-token \
     --repo owner/name \
     -- /path/to/your-agent-invocation.sh</pre>
@@ -103,7 +103,7 @@
 
     <section class="cta">
       <h2 class="label">Get the client</h2>
-      <a class="btn" href="https://github.com/devNalyx/bridge-site/releases">Download bridge-client →</a>
+      <a class="btn" href="https://github.com/devNalyx/bridge-site/releases">Download bridge →</a>
       <a class="btn ghost" href="/onboarding.html">Connecting a repo instead →</a>
     </section>
 

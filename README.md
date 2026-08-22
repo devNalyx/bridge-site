@@ -23,12 +23,14 @@ there — if the two drift, that file wins.
   before trusted). Adapted from `devNalyx/bridge`'s internal
   `docs/operations/onboarding-a-repo.md` runbook, stripped of internal issue numbers and
   implementation detail — same drift rule as `index.html` applies if the two are ever both updated.
-- `teammate.html` — the real-team path: connecting your own AI agent via `bridge-client`, a real,
-  correctly-scoped, downloadable client — never a copy of Bridge's own daemon or sandbox. Removed
-  2026-08-22 (an earlier version described the wrong architecture), rebuilt correctly 2026-08-23
-  once the real client existed. Adapted from `devNalyx/bridge`'s internal
-  `docs/operations/onboarding-a-teammate.md`, stripped of internal file paths and package names —
-  same drift rule as `index.html` applies. Links to the real public release:
+- `teammate.html` — the real-team path: connecting your own AI agent via `bridge` (the real
+  end-user client — see `devNalyx/bridge`'s ADR-0018 for why the product's own short name belongs
+  to this binary and not the internal server), a correctly-scoped, downloadable client — never a
+  copy of Bridge's own daemon or sandbox. Removed 2026-08-22 (an earlier version described the
+  wrong architecture), rebuilt correctly 2026-08-23 once the real client existed. Adapted from
+  `devNalyx/bridge`'s internal `docs/operations/onboarding-a-teammate.md`, stripped of internal
+  file paths and package names — same drift rule as `index.html` applies. Links to the real
+  public release:
   `github.com/devNalyx/bridge-site/releases`.
 - `og-image.png` — 1200×630 social share preview (`og:image`/`twitter:image`), rendered from the
   page's own dark terminal aesthetic so a shared link doesn't show a blank card.
