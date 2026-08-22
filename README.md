@@ -23,6 +23,10 @@ there — if the two drift, that file wins.
   before trusted). Adapted from `devNalyx/bridge`'s internal
   `docs/operations/onboarding-a-repo.md` runbook, stripped of internal issue numbers and
   implementation detail — same drift rule as `index.html` applies if the two are ever both updated.
+- `teammate.html` — the real-team path: a person running their own AI agent, on their own machine,
+  connecting directly instead of going through the shared trial instance. Adapted from
+  `devNalyx/bridge`'s internal `docs/operations/onboarding-a-teammate.md`, stripped of internal
+  file paths, CLI flags, and package names — same drift rule applies.
 - `og-image.png` — 1200×630 social share preview (`og:image`/`twitter:image`), rendered from the
   page's own dark terminal aesthetic so a shared link doesn't show a blank card.
 - `robots.txt`, `sitemap.xml` — basic crawl/indexing hygiene for the single page.
