@@ -18,6 +18,11 @@ there — if the two drift, that file wins.
 
 - `index.html` — the landing page, rebuilt around Bridge's orchestration/control-plane
   positioning (tracked in `devNalyx/bridge` issue #37, shipped).
+- `onboarding.html` — a second, generically-useful page: what actually happens when a repo starts
+  working with Bridge (App install, scoped permissions, conservative policy defaults, watched
+  before trusted). Adapted from `devNalyx/bridge`'s internal
+  `docs/operations/onboarding-a-repo.md` runbook, stripped of internal issue numbers and
+  implementation detail — same drift rule as `index.html` applies if the two are ever both updated.
 - `og-image.png` — 1200×630 social share preview (`og:image`/`twitter:image`), rendered from the
   page's own dark terminal aesthetic so a shared link doesn't show a blank card.
 - `robots.txt`, `sitemap.xml` — basic crawl/indexing hygiene for the single page.

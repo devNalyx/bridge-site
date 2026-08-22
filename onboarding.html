@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connecting a repo to Bridge</title>
+  <meta name="description" content="A concrete look at how a repository actually starts working with Bridge — App install, scoped permissions, conservative policy defaults, and watching it before trusting it.">
+  <link rel="canonical" href="https://bridge.nalyx.dev/onboarding.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0iIzBhMGEwYiIvPjxjaXJjbGUgY3g9IjkiIGN5PSIyMSIgcj0iMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNWVlYWQ0IiBzdHJva2Utd2lkdGg9IjIiLz48Y2lyY2xlIGN4PSIyMyIgY3k9IjIxIiByPSIzIiBmaWxsPSIjNWVlYWQ0Ii8+PHBhdGggZD0iTTkgMjFDOSAxMCAyMyAxMCAyMyAyMSIgc3Ryb2tlPSIjNWVlYWQ0IiBzdHJva2Utd2lkdGg9IjIuMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==">
+  <meta property="og:title" content="Connecting a repo to Bridge">
+  <meta property="og:description" content="A concrete look at how a repository actually starts working with Bridge — not marketing copy, the real steps.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://bridge.nalyx.dev/onboarding.html">
+  <meta property="og:image" content="https://bridge.nalyx.dev/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Connecting a repo to Bridge">
+  <meta name="twitter:description" content="A concrete look at how a repository actually starts working with Bridge — not marketing copy, the real steps.">
+  <meta name="twitter:image" content="https://bridge.nalyx.dev/og-image.png">
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #0a0a0b; color: #e6e6e6;
+           font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    main { max-width: 46rem; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+
+    .hero h1 { font-size: clamp(1.6rem, 4.5vw, 2.4rem); margin: 0 0 .5rem; letter-spacing: -.02em; }
+    .hero h1 span { color: #5eead4; }
+    .hero p { color: #9ca3af; line-height: 1.7; font-size: 1rem; }
+    .back { display: inline-block; margin-bottom: 1.5rem; color: #71717a; text-decoration: none; font-size: .85rem; }
+    .back:hover { color: #5eead4; }
+
+    section { margin-top: 2.5rem; }
+    h2.label { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: #5eead4;
+                margin: 0 0 1rem; }
+    p { color: #9ca3af; line-height: 1.65; font-size: .95rem; margin: 0 0 .75rem; }
+    strong { color: #d1d5db; }
+
+    ol.steps { margin: 0; padding-left: 1.2rem; color: #9ca3af; font-size: .9rem; line-height: 1.6; }
+    ol.steps > li { margin-bottom: 1.25rem; }
+    ol.steps li strong { color: #d1d5db; }
+
+    .note { font-size: .85rem; color: #71717a; margin-top: 1.25rem; }
+
+    .cta { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #26272b; }
+    .cta a.btn { display: inline-block; padding: .6rem 1.1rem; border: 1px solid #5eead4;
+                 border-radius: .4rem; color: #5eead4; text-decoration: none; font-size: .9rem;
+                 margin-right: .75rem; margin-bottom: .5rem; }
+    .cta a.btn:hover { background: #5eead422; }
+    .cta a.btn.ghost { border-color: #26272b; color: #9ca3af; }
+    .cta a.btn.ghost:hover { background: #111113; }
+
+    footer.status { margin-top: 2.5rem; border-top: 1px solid #26272b; padding-top: 1rem;
+              color: #71717a; font-size: .8rem; }
+    a { color: #5eead4; }
+    a:focus-visible, .cta a.btn:focus-visible { outline: 2px solid #5eead4; outline-offset: 2px; }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="/">← Bridge</a>
+    <section class="hero">
+      <h1>Connecting a repo<span>_</span></h1>
+      <p>A concrete look at what actually happens when a repository starts working with Bridge —
+      not marketing copy, the real process used for every repo Bridge currently coordinates.</p>
+    </section>
+
+    <section>
+      <p><strong>One fact worth knowing up front:</strong> a single running Bridge instance already
+      supports multiple repositories at once. Adding a repo isn't new infrastructure or a code
+      change — it's routing configuration, applied to a system that's already running.</p>
+    </section>
+
+    <section>
+      <h2 class="label">The process</h2>
+      <ol class="steps">
+        <li><strong>Install, scoped narrowly.</strong> Bridge connects the same way any GitHub App
+        does — installed on the specific repository, not the whole account, with the minimum
+        permissions it actually needs (contents: read, pull requests and issues: read/write) and
+        subscribed only to the events it reacts to (pull request activity, reviews, issue
+        comments).</li>
+        <li><strong>Routing and roles, decided up front.</strong> Each repo gets its own
+        subscriptions: which roles — implementer, reviewer, security reviewer, tester, human
+        approver — are watching it, and under what policy they're allowed to act.</li>
+        <li><strong>Conservative by default.</strong> A repo Bridge hasn't worked with before starts
+        with no auto-approval rules at all. Every decision that matters goes to a human until the
+        system has demonstrated, on that repo specifically, that it behaves correctly.</li>
+        <li><strong>Watched, not assumed.</strong> The first real pull requests get read closely —
+        does the routing look right, does the context handed between participants make sense, does
+        the audit trail read the way it should. Trust in a new repo is earned by watching it work,
+        not granted the moment the install finishes.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2 class="label">Why it's a process, not a button</h2>
+      <p>This is also why early access starts as a conversation rather than a self-serve signup —
+      connecting a new repo is a deliberate, watched step, the same one used internally, not a
+      black box turned on for anyone who asks.</p>
+    </section>
+
+    <section class="cta">
+      <h2 class="label">Get early access</h2>
+      <a class="btn" href="mailto:ali@nalyx.dev?subject=Bridge%20early%20access&body=Hi%20-%20I'd%20like%20early%20access%20to%20Bridge.%0A%0AWhat%20I'm%20working%20on%3A%20">Get early access →</a>
+      <a class="btn ghost" href="/">Back to Bridge</a>
+    </section>
+
+    <footer class="status">
+      <span style="color:#5eead4">[ONLINE]</span> part of
+      <a href="/">Bridge</a> · early access via
+      <a href="mailto:ali@nalyx.dev">ali@nalyx.dev</a>
+    </footer>
+  </main>
+</body>
+</html>
