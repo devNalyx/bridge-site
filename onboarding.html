@@ -65,6 +65,18 @@
     </section>
 
     <section>
+      <h2 class="label">What you actually do</h2>
+      <p>Nothing to download, nothing to install, no IDE or agent integration on your end. Bridge
+      isn't a CLI tool or an MCP server you run yourself — it's a service that's already running
+      continuously, watching the repos it's been connected to.</p>
+      <p>Concretely: you <a href="#early-access">ask for early access</a>, your repo gets the
+      Bridge GitHub App installed and wired into the running instance, and from then on you just
+      use GitHub the way you already do — open pull requests, request reviews, file issues. Bridge
+      reacts to those events and dispatches its own AI agents to act on them; when your judgment is
+      actually needed, you get a normal GitHub notification, the same as from a human reviewer.</p>
+    </section>
+
+    <section>
       <p><strong>One fact worth knowing up front:</strong> a single running Bridge instance already
       supports multiple repositories at once. Adding a repo isn't new infrastructure or a code
       change — it's routing configuration, applied to a system that's already running.</p>
@@ -92,10 +104,13 @@
     </section>
 
     <section>
-      <h2 class="label">Why it's a process, not a button</h2>
-      <p>This is also why early access starts as a conversation rather than a self-serve signup —
-      connecting a new repo is a deliberate, watched step, the same one used internally, not a
-      black box turned on for anyone who asks.</p>
+      <h2 class="label">Worth knowing before you join</h2>
+      <p>Right now this is one shared instance, not a multi-tenant product — every connected repo
+      runs through the same daemon and the same underlying AI credentials. There's no per-tenant
+      isolation yet; that's a deliberate limitation of this early, trusted-evaluator phase, not an
+      oversight, and it's the real reason early access starts as a direct conversation rather than
+      a self-serve signup. Isolation between tenants is planned work, not something to assume is
+      already there.</p>
     </section>
 
     <section class="cta">
