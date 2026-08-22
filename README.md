@@ -23,10 +23,11 @@ there — if the two drift, that file wins.
   before trusted). Adapted from `devNalyx/bridge`'s internal
   `docs/operations/onboarding-a-repo.md` runbook, stripped of internal issue numbers and
   implementation detail — same drift rule as `index.html` applies if the two are ever both updated.
-- `teammate.html` — the real-team path: a person running their own AI agent, on their own machine,
-  connecting directly instead of going through the shared trial instance. Adapted from
-  `devNalyx/bridge`'s internal `docs/operations/onboarding-a-teammate.md`, stripped of internal
-  file paths, CLI flags, and package names — same drift rule applies.
+- `teammate.html` — **removed 2026-08-22.** Described a "run your own local Bridge process" model
+  that turned out to be architecturally wrong: Bridge is a SaaS — the daemon and its sandbox run
+  only ever on Bridge's own infrastructure, never on a customer's machine. What a real team member
+  actually gets (a thin client connecting their own agent, not a copy of the daemon) needs a real
+  design pass before it's documented again, publicly or otherwise.
 - `og-image.png` — 1200×630 social share preview (`og:image`/`twitter:image`), rendered from the
   page's own dark terminal aesthetic so a shared link doesn't show a blank card.
 - `robots.txt`, `sitemap.xml` — basic crawl/indexing hygiene for the single page.
