@@ -18,20 +18,17 @@ there — if the two drift, that file wins.
 
 - `index.html` — the landing page, rebuilt around Bridge's orchestration/control-plane
   positioning (tracked in `devNalyx/bridge` issue #37, shipped).
-- `onboarding.html` — a second, generically-useful page: what actually happens when a repo starts
-  working with Bridge (App install, scoped permissions, conservative policy defaults, watched
-  before trusted). Adapted from `devNalyx/bridge`'s internal
-  `docs/operations/onboarding-a-repo.md` runbook, stripped of internal issue numbers and
-  implementation detail — same drift rule as `index.html` applies if the two are ever both updated.
-- `teammate.html` — the real-team path: connecting your own AI agent via `bridge` (the real
-  end-user client — see `devNalyx/bridge`'s ADR-0018 for why the product's own short name belongs
-  to this binary and not the internal server), a correctly-scoped, downloadable client — never a
-  copy of Bridge's own daemon or sandbox. Removed 2026-08-22 (an earlier version described the
-  wrong architecture), rebuilt correctly 2026-08-23 once the real client existed. Adapted from
-  `devNalyx/bridge`'s internal `docs/operations/onboarding-a-teammate.md`, stripped of internal
-  file paths and package names — same drift rule as `index.html` applies. Links to the real
-  public release:
+- `teammate.html` — the one real onboarding path: connecting your own AI agent via `bridge` (the
+  real end-user client — see `devNalyx/bridge`'s ADR-0018 for why the product's own short name
+  belongs to this binary and not the internal server), a correctly-scoped, downloadable client.
+  Removed 2026-08-22 (an earlier version described the wrong architecture), rebuilt correctly
+  2026-08-23 once the real client existed. Adapted from `devNalyx/bridge`'s internal
+  `docs/operations/onboarding-a-teammate.md`, stripped of internal file paths and package names —
+  same drift rule as `index.html` applies. Links to the real public release:
   `github.com/devNalyx/bridge-site/releases`.
+  **`onboarding.html` was removed 2026-08-23**: it described a "shared instance" hosted-daemon
+  path that no longer exists at all — Bridge has no hosted execution path anymore, so there's
+  only ever this one path in.
 - `og-image.png` — 1200×630 social share preview (`og:image`/`twitter:image`), rendered from the
   page's own dark terminal aesthetic so a shared link doesn't show a blank card.
 - `robots.txt`, `sitemap.xml` — basic crawl/indexing hygiene for the single page.
