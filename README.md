@@ -21,10 +21,9 @@ there — if the two drift, that file wins.
 - `index.html` — the landing page: what Bridge is (a harness-invoked MCP server, ADR-0022),
   the problem it solves, who it's for, its four real tools, and proof it's real.
 - `connect.html` — the real onboarding path: registering `bridge-mcp` with your own harness's MCP
-  config, with an honest per-client verification-tier table (live-verified vs. documented), linking
-  out to `devNalyx/bridge`'s public
-  [onboarding runbook](https://github.com/devNalyx/bridge/blob/main/docs/operations/onboarding-bridge-mcp.md)
-  for full per-client config blocks and every corner case. Replaces `teammate.html`, which described
+  config, with an honest per-client verification-tier table (live-verified vs. documented) inlined
+  on the page itself — `devNalyx/bridge` (where the fuller onboarding runbook lives) is private, so
+  it isn't linked directly; same standing rule as `index.html`'s. Replaces `teammate.html`, which described
   a standalone downloadable client (`bridge`/`internal/thinclient`) — a real, shipped architecture
   that was itself later rejected and deleted in favor of the current harness-invoked model; see
   `devNalyx/bridge`'s ADR-0022 for that history. Nothing about that back-and-forth is reflected
