@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bridge — coordinate humans and AI agents as one software team</title>
-  <meta name="description" content="Bridge is the orchestration layer for hybrid software teams — coordinating GitHub pull requests across AI coding agents, reviewers, and humans, with policy-aware automation and human-in-the-loop approval.">
+  <meta name="description" content="Bridge runs inside the AI harness you already use — Claude Code, OpenCode, and others — as a small MCP server. Presence, events, and act-back for hybrid software teams, with zero AI of its own.">
   <link rel="canonical" href="https://bridge.nalyx.dev/">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0iIzBhMGEwYiIvPjxjaXJjbGUgY3g9IjkiIGN5PSIyMSIgcj0iMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNWVlYWQ0IiBzdHJva2Utd2lkdGg9IjIiLz48Y2lyY2xlIGN4PSIyMyIgY3k9IjIxIiByPSIzIiBmaWxsPSIjNWVlYWQ0Ii8+PHBhdGggZD0iTTkgMjFDOSAxMCAyMyAxMCAyMyAyMSIgc3Ryb2tlPSIjNWVlYWQ0IiBzdHJva2Utd2lkdGg9IjIuMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+Cg==">
   <meta property="og:title" content="Bridge — coordinate humans and AI agents as one software team">
-  <meta property="og:description" content="The orchestration layer for hybrid software teams. Not another coding agent. Not another dashboard. The layer that decides what happens next.">
+  <meta property="og:description" content="Bridge runs inside the AI harness you already use — a small MCP server, zero AI of its own. Presence, events, and act-back for hybrid software teams.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://bridge.nalyx.dev">
   <meta property="og:image" content="https://bridge.nalyx.dev/og-image.png">
@@ -16,7 +16,7 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Bridge — coordinate humans and AI agents as one software team">
-  <meta name="twitter:description" content="The orchestration layer for hybrid software teams. Not another coding agent. Not another dashboard. The layer that decides what happens next.">
+  <meta name="twitter:description" content="Bridge runs inside the AI harness you already use — a small MCP server, zero AI of its own. Presence, events, and act-back for hybrid software teams.">
   <meta name="twitter:image" content="https://bridge.nalyx.dev/og-image.png">
   <script type="application/ld+json">
   {
@@ -35,7 +35,7 @@
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Cross-platform",
         "url": "https://bridge.nalyx.dev",
-        "description": "Bridge is the orchestration layer for hybrid software teams — it routes work, carries context, enforces policy, and knows exactly when to bring a human in."
+        "description": "Bridge is an MCP server that runs inside the AI harness you already use, giving hybrid human/AI teams live presence, recent events, and a way to act back on GitHub — with zero AI or decision-making of its own."
       }
     ]
   }
@@ -129,26 +129,28 @@
     <section class="hero">
       <h1>Bridge<span>_</span></h1>
       <p class="tagline">Coordinate humans and AI agents as one software team.</p>
-      <p>Bridge is the operational orchestration layer for hybrid software teams — it routes work,
-      carries context, enforces policy, and knows exactly when to bring a human in. Not another
-      coding agent. Not another dashboard. The layer that decides what happens next.</p>
-      <p class="sub"><span style="color:#5eead4">[PRE-LAUNCH]</span></p>
+      <p>Bridge runs <strong>inside the AI harness you already use</strong> — Claude Code, OpenCode,
+      Gemini CLI, and others — as a small MCP server your harness spawns itself. It never runs
+      standalone, never dials out on its own, and holds no API key or LLM of its own: every
+      decision is made by your own harness's own model, using your own credentials. Bridge is the
+      shared presence and event layer between sessions, not another agent.</p>
+      <p class="sub"><span style="color:#5eead4">[LIVE]</span></p>
     </section>
 
     <section>
       <h2 class="label">The problem</h2>
-      <p>Multiple agents can already execute work — implement, review, test, investigate. What's
-      missing is the layer that coordinates them: deciding who acts next, carrying context between
-      participants, enforcing policy on what can happen automatically, and knowing when a human
-      needs to step in. Today that layer is you: copy-pasting results between terminals,
-      re-explaining context to the next agent, deciding by hand who should act next.</p>
+      <p>Multiple agents can already execute work — implement, review, test, investigate — each in
+      its own terminal, each blind to what the others are doing. Nothing shows you who's active on
+      a repo right now, what just happened, or lets one session hand a decision to another without
+      you copy-pasting between windows.</p>
     </section>
 
     <section>
       <h2 class="label">The solution</h2>
-      <p>Bridge is not a webhook relay with a product wrapped around it. It's the control plane:
-      given what just happened in your repo, Bridge decides who or what should act next, with what
-      context, under what policy — and whether it needs you first.</p>
+      <p>Bridge is a small set of tools your harness calls when it decides to — never data pushed
+      at it, never a process running outside your control. Ask "who else is working on this repo,"
+      see what happened recently, and post your own agent's decision back to GitHub — all through
+      the harness you already trust, spawning a server whose entire source you can read.</p>
     </section>
 
     <section>
@@ -171,71 +173,68 @@
 
     <section>
       <h2 class="label">How it works</h2>
-      <p>The first proven workflow: <strong>implementer → Bridge → reviewer → Bridge → human.</strong></p>
       <ol class="steps">
-        <li>An <strong>implementation agent</strong> builds a change and opens a pull request.</li>
-        <li><strong>Bridge</strong> detects the event and routes it to the reviewer role, with the
-            context it needs attached.</li>
-        <li>The <strong>reviewer</strong> acts — no copy-pasting between terminals.</li>
-        <li>Changes requested → Bridge hands it back to the <strong>implementer</strong>, automatically.</li>
-        <li>Review passes → Bridge checks policy: does this need your approval?</li>
-        <li><strong>You're</strong> notified only when your judgment is actually the next step.</li>
+        <li>Your <strong>harness</strong> spawns <code>bridge-mcp</code> as its own child process —
+            the harness is always the parent, never the other way round.</li>
+        <li>Your harness's own model decides, on its own initiative, to call a tool: check who
+            else is connected, announce itself with a role, read recent repo events, or post a
+            decision back to GitHub.</li>
+        <li><strong>Bridge relays exactly that</strong> — real data in, real data out — and makes
+            no decision of its own anywhere in the loop.</li>
+        <li>Every write is checked against the real GitHub API with your own token before anything
+            happens; nothing is trusted from a request body alone.</li>
       </ol>
-      <pre class="cmd">$ bridge watch --repo owner/repo
+      <pre class="cmd"><span class="role">[claude-code, role: reviewer]</span> bridge_announce → joined the roster
+<span class="role">[opencode, role: implementer]</span> bridge_announce → joined the roster
+  <span class="arrow">→ both now visible to each other via bridge_roster, live</span>
 
-<span class="role">[implementer]</span> opened PR #142 "Add rate limiting to /api/ingest"
-  <span class="arrow">→ routed to reviewer · context attached (diff, linked issue, prior notes)</span>
-
-<span class="role">[reviewer]</span> requested changes — rate limit window is hardcoded
-  <span class="arrow">→ routed back to implementer</span>
-
-<span class="role">[implementer]</span> pushed a fix, re-requested review
-<span class="role">[reviewer]</span> approved
-  <span class="gate">→ policy: security-sensitive path → human approval required</span>
-  <span class="dim"># notified you · waiting on your call</span></pre>
+<span class="role">[opencode]</span> bridge_events → "PR #142 opened, issue #98 dispatched"
+<span class="role">[claude-code]</span> bridge_act_back(comment, "LGTM, one nit inline")
+  <span class="gate">→ posted to GitHub with the caller's own token, real auth-checked</span></pre>
     </section>
 
     <section>
       <h2 class="label">Core capabilities</h2>
       <div class="grid">
         <div class="card">
-          <h3>Roles</h3>
-          <p>Implementer, reviewer, security reviewer, tester, human approver — every participant
-          has a defined responsibility and bounded authority.</p>
+          <h3>Presence</h3>
+          <p>See every session currently announced on a repo, with whatever role and harness label
+          it chose, live.</p>
+        </div>
+        <div class="card">
+          <h3>Announce</h3>
+          <p>Put your own session on that same roster, so others can see you working — a real,
+          TTL-based join, no persistent connection required.</p>
         </div>
         <div class="card">
           <h3>Events</h3>
-          <p>PR opened, review requested, CI failed, approval needed — Bridge reacts to what
-          actually happened in your repo, not a poll loop.</p>
+          <p>Recent, redacted activity for a repo — opened, decided, dispatched — never comment
+          bodies or free-text, just enough to know what happened.</p>
         </div>
         <div class="card">
-          <h3>Context</h3>
-          <p>A handoff carries what the next participant needs to act, not just a notification that
-          something happened.</p>
+          <h3>Act back</h3>
+          <p>Post a comment, approve, request changes, or label a PR — exactly what your harness's
+          own model decided, using your own GitHub token, never Bridge's.</p>
         </div>
         <div class="card">
-          <h3>Handoffs</h3>
-          <p>Work moves from implementer to reviewer to human automatically, with nothing lost in
-          translation.</p>
+          <h3>Zero Bridge-side intelligence</h3>
+          <p>No tool call ever triggers an LLM call inside Bridge's own infrastructure. Every
+          judgment call is made by the harness that called the tool.</p>
         </div>
         <div class="card">
-          <h3>Policies</h3>
-          <p>Routine work proceeds automatically. Security-sensitive changes and ambiguous calls
-          stop for a human — by policy, not by accident.</p>
-        </div>
-        <div class="card">
-          <h3>Human escalation</h3>
-          <p>You're brought in exactly when your judgment has the highest value, not for every
-          step.</p>
+          <h3>Real auth, every write</h3>
+          <p>Relay checks the caller's GitHub token against the live GitHub API before trusting
+          anything — never a Bridge-maintained access list.</p>
         </div>
         <div class="card">
           <h3>Auditability</h3>
-          <p>Handoffs, approvals, and actions are traceable — a system you can trust with real
-          repos.</p>
+          <p>Every roster entry and event traces back to a real GitHub identity — a system you can
+          trust with real repos.</p>
         </div>
       </div>
-      <p class="note">Bridge runs entirely outbound — no open inbound ports, no tunnel to babysit —
-      but that's plumbing in service of the above, not the point of the product.</p>
+      <p class="note">Bridge runs entirely outbound on the hosted side too — no open inbound ports,
+      no tunnel to babysit — but that's plumbing in service of the above, not the point of the
+      product.</p>
     </section>
 
     <section>
@@ -247,11 +246,10 @@
           </thead>
           <tbody>
             <tr><th>Coding agents</th><td>Generate and modify code</td><td>Bridge coordinates them, it doesn't compete with them</td></tr>
-            <tr><th>GitHub</th><td>Source control and collaboration</td><td>Bridge orchestrates the workflow that happens around it</td></tr>
+            <tr><th>GitHub</th><td>Source control and collaboration</td><td>Bridge surfaces live presence and events your harness can act on, inside the session you're already in</td></tr>
             <tr><th>Jira / Linear</th><td>Represent and track work</td><td>Bridge coordinates the execution of that work across participants</td></tr>
-            <tr><th>Engineering analytics</th><td>Measure performance after the fact</td><td>Bridge operates during the workflow, not after it</td></tr>
-            <tr><th>Chat platforms</th><td>Human communication</td><td>Bridge automates the handoffs chat can't</td></tr>
-            <tr><th>Automation platforms</th><td>Generic, protocol-agnostic automation</td><td>Bridge is purpose-built for human–AI software workflows</td></tr>
+            <tr><th>Chat platforms</th><td>Human communication</td><td>Bridge lets sessions see each other without a human relaying manually</td></tr>
+            <tr><th>A custom MCP server you'd write yourself</th><td>Same idea, one-off, unmaintained</td><td>Bridge is a maintained, tested, real-auth-checked version of exactly that</td></tr>
           </tbody>
         </table>
       </div>
@@ -260,45 +258,44 @@
     <section>
       <h2 class="label">Why Bridge</h2>
       <p>Because the future of AI-assisted development isn't one perfect agent doing everything —
-      it's several specialized agents and humans, and someone has to make them work together well.
-      That's the harder problem, and it's the one Bridge is built around. Bridge doesn't compete
-      with your coding agents, your GitHub, or your issue tracker — it complements all of them.
-      What it replaces is manual coordination between autonomous participants.</p>
+      it's several specialized agents and humans, and someone has to make them visible to each
+      other. Bridge doesn't compete with your coding agents, your GitHub, or your issue tracker —
+      it complements all of them, running inside whichever one you already chose, never as an extra
+      process to trust separately.</p>
     </section>
 
     <section>
       <h2 class="label">Proof, not promises</h2>
       <ul class="proof">
-        <li><strong>Built, not mocked up.</strong> A real GitHub App, real webhook ingestion, real
-        sandboxed AI agents, and a real policy gate — the loop on this page runs against actual
-        repos, not a demo script.</li>
-        <li><strong>Adversarially audited twice.</strong> Each round of independent review found and
-        fixed real gaps — including a critical security issue — before the work was called done.</li>
-        <li><strong>Every decision is traceable.</strong> Handoffs, approvals, and policy calls can
-        be reconstructed after the fact: who acted, on what context, under what policy.</li>
+        <li><strong>Built, not mocked up.</strong> A real MCP server (<code>cmd/bridge-mcp</code>),
+        a real relay with real GitHub-token authorization on every write, and real tools — driven
+        this way against production, not a demo script.</li>
+        <li><strong>Live-verified across real clients.</strong> The actual binary, loaded by a
+        harness's own MCP config (not a hand-simulated protocol call), calling the real deployed
+        relay.</li>
+        <li><strong>Every roster entry and event is traceable</strong> back to a real GitHub
+        identity — relay checks the caller's token against the live GitHub API before trusting
+        anything in the request.</li>
       </ul>
-      <p class="note">Don't take our word for it — <a href="https://status-bridge.nalyx.dev">see real activity live</a>, no login required.</p>
+      <p class="note">Don't take our word for it — <a href="https://status-bridge.nalyx.dev">see real activity live</a>
+      and the <a href="https://console-bridge.nalyx.dev">live session roster</a>, no login required to view.</p>
     </section>
 
     <section>
       <h2 class="label">Vision</h2>
       <blockquote>Today you think: "which terminal do I need to open next, and which agent do I
-      need to tell what?" Bridge's goal is for you to think instead: "the system knows who's
-      responsible for the next step."</blockquote>
-      <p style="margin-top:.75rem">Agents execute. Bridge coordinates. Humans decide where judgment
-      matters.</p>
-      <p>Longer term, the same operational position that lets Bridge coordinate a workflow lets it
-      learn from one: which reviewers care about what, which agents perform well on which tasks,
-      where human intervention is actually needed. That's a future capability Bridge earns by
-      proving the coordination loop first — not a claim about what exists today.</p>
+      need to tell what?" Bridge's goal is for you to think instead: "I can just ask — who else is
+      here, and what happened."</blockquote>
+      <p style="margin-top:.75rem">Agents execute. Bridge makes them visible to each other. Humans
+      decide where judgment matters.</p>
     </section>
 
     <section id="early-access">
-      <h2 class="label">Get early access</h2>
+      <h2 class="label">Get connected</h2>
       <div class="access">
-        <p>Genuinely self-service, today — nothing to ask anyone. Install the App on your own repo,
-        connect your own AI agent, done.</p>
-        <a class="btn" href="/teammate.html">Connect your own agent →</a>
+        <p>Genuinely self-service, today — nothing to ask anyone. Point your own harness's MCP
+        config at <code>bridge-mcp</code>, set your own GitHub token, done.</p>
+        <a class="btn" href="/connect.html">Connect your harness →</a>
       </div>
     </section>
 
@@ -307,7 +304,7 @@
       <p>The product repo is private for now. This site's own source is public, if you're
       curious how it's built.</p>
       <a class="btn ghost" href="https://github.com/devNalyx/bridge-site">Site source on GitHub</a>
-      <a class="btn ghost" href="/teammate.html">Running your own agent →</a>
+      <a class="btn ghost" href="/connect.html">Connect your harness →</a>
     </section>
 
     <footer class="status">
