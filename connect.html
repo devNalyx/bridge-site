@@ -51,6 +51,7 @@
     table.clients tbody tr + tr th, table.clients tbody tr + tr td { border-top: 1px solid #1c1d21; }
     .tier-live { color: #5eead4; }
     .tier-doc { color: #71717a; }
+    .tier-partial { color: #fbbf24; }
 
     .cta { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #26272b; }
     .cta a.btn { display: inline-block; padding: .6rem 1.1rem; border: 1px solid #5eead4;
@@ -104,18 +105,21 @@ $ claude mcp list        # confirm it shows "bridge", 4 tools</pre>
 
     <section>
       <h2 class="label">Supported clients — honest verification tier per client</h2>
-      <p>Every row is either <span class="tier-live">live-verified</span> — the real binary, loaded
+      <p>Every row is <span class="tier-live">live-verified</span> — the real binary, loaded
       by that client's own MCP config, calling the real deployed relay — or
-      <span class="tier-doc">documented</span> — a real, correct config for that client, not yet
-      independently fired in this environment. No row claims more than what was actually done.</p>
+      <span class="tier-partial">gates fixed, provider-blocked</span> — a real client bug or gate
+      was found and fixed, reaching a real Bridge tool call, but the client's own model account
+      hit its own credits/quota limit — or <span class="tier-doc">documented</span> — a real,
+      correct config for that client, not yet independently fired in this environment. No row
+      claims more than what was actually done.</p>
       <div class="table-wrap">
         <table class="clients">
           <thead><tr><th>Client</th><th>Tier</th><th>Config</th></tr></thead>
           <tbody>
             <tr><th>Claude Code</th><td class="tier-live">✅ live-verified</td><td><code>claude mcp add</code></td></tr>
             <tr><th>OpenCode</th><td class="tier-live">✅ live-verified</td><td><code>opencode.json</code></td></tr>
-            <tr><th>Gemini CLI</th><td class="tier-doc">📄 documented</td><td><code>~/.gemini/settings.json</code></td></tr>
-            <tr><th>Codex CLI</th><td class="tier-doc">📄 documented</td><td><code>~/.codex/config.toml</code></td></tr>
+            <tr><th>Gemini CLI</th><td class="tier-partial">🟡 gates fixed, quota-blocked</td><td><code>~/.gemini/settings.json</code></td></tr>
+            <tr><th>Codex CLI</th><td class="tier-partial">🟡 gates fixed, credit-blocked</td><td><code>~/.codex/config.toml</code></td></tr>
             <tr><th>Claude Desktop</th><td class="tier-doc">📄 documented</td><td><code>claude_desktop_config.json</code></td></tr>
             <tr><th>Cursor</th><td class="tier-doc">📄 documented</td><td><code>.cursor/mcp.json</code></td></tr>
             <tr><th>Windsurf</th><td class="tier-doc">📄 documented</td><td><code>mcp_config.json</code></td></tr>
